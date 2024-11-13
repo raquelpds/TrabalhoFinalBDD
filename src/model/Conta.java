@@ -3,7 +3,7 @@ package model;
 abstract class Conta {
     private int numero;
     private String agencia;
-    private double saldo;
+    protected double saldo;
     private Cliente cliente;
 
     //construtor
@@ -61,7 +61,7 @@ abstract class Conta {
     }
 
     public double consultarSaldo(){
-        return saldo;
+        return this.saldo;
     }
 
 }
