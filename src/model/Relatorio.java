@@ -15,6 +15,31 @@ public class Relatorio {
         this.tipo = tipo;
     }
 
+    //métodos getters and setters
+    public List<String> getDados() {
+        return dados;
+    }
+
+    public void setDados(List<String> dados) {
+        this.dados = dados;
+    }
+
+    public LocalDateTime getDataGeracao() {
+        return dataGeracao;
+    }
+
+    public void setDataGeracao(LocalDateTime dataGeracao) {
+        this.dataGeracao = dataGeracao;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     //métodos
     public void gerarRelatorioGeral(){
         //implementação
