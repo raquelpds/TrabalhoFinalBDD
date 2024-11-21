@@ -9,6 +9,7 @@ public class ConexaoBanco {
 
     public static Connection conectar(){
         //implementação
+        return null;
     }
 
     public static void desconectar(Connection conexao){
