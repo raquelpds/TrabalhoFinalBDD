@@ -17,4 +17,12 @@ public class ConnectionFactory {
         }
     }
 
+    public static void main(String[] args) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            System.out.println("Conexão estabelecida com sucesso!");
+        } catch (SQLException e) {
+            System.err.println("Falha na conexão: " + e.getMessage());
+        }
+    }
+
 }
