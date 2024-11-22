@@ -4,10 +4,12 @@ import java.time.LocalDate;
 
 public class Cliente extends Usuario {
     private String senha;
+    private int usuario_id;
 
-    public Cliente(int id, String nome, String cpf, LocalDate dataNascimento, String telefone, Endereco endereco, String senha) {
-        super(id, nome, cpf, dataNascimento, telefone, endereco);
+    public Cliente(int id_usuario, String nome, String cpf, LocalDate data_nascimento, String telefone, Endereco endereco, String senha, int usuario_id) {
+        super(id_usuario, nome, cpf, data_nascimento, telefone, endereco);
         this.senha = senha;
+        this.usuario_id = usuario_id;
     }
 
     @Override

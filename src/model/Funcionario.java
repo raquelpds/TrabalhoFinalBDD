@@ -4,23 +4,27 @@ import java.time.LocalDate;
 
 public class Funcionario extends Usuario {
     //atributos
-    private String codigoFuncionario;
+    private int id_funcionario;
+    private String codigo_funcionario;
     private String cargo;
     private String senha;
-    private  int id_usuario; //relacionado a tabela usuario
+    private int usuario_id; //relacionado a tabela usuario
 
     //Construtor
-    public Funcionario (int id, String nome, String cpf, LocalDate dataNascimento, String telefone, Endereco endereco, String senha, String codigoFuncionario, String cargo){
-        super(id, nome, cpf, dataNascimento, telefone, endereco); //chama o construtor de usuário
-        this.codigoFuncionario = codigoFuncionario;
+    public Funcionario (int id_usuario, String nome, String cpf, LocalDate data_nascimento, String telefone, Endereco endereco, String senha, String codigo_funcionario, String cargo, int usuario_id){
+        super(id_usuario, nome, cpf, data_nascimento, telefone, endereco); //chama o construtor de usuário
+        this.codigo_funcionario = codigo_funcionario;
         this.cargo = cargo;
         this.senha = senha;
+        this.usuario_id = usuario_id;
     }
+
+
 
     @Override
     public boolean login(String senha){
         //validação específica para funcionário
-        if(this.senha.equals(senha) && this.codigoFuncionario != null){
+        if(this.senha.equals(senha) && this.codigo_funcionario != null){
             return true;
         }
         return false;
@@ -71,12 +75,12 @@ public class Funcionario extends Usuario {
         this.cargo = cargo;
     }
 
-    public String getCodigoFuncionario() {
-        return codigoFuncionario;
+    public String getCodigo_funcionario() {
+        return codigo_funcionario;
     }
 
-    public void setCodigoFuncionario(String codigoFuncionario) {
-        this.codigoFuncionario = codigoFuncionario;
+    public void setCodigo_funcionario(String codigo_funcionario) {
+        this.codigo_funcionario = codigo_funcionario;
     }
 
     public String getSenha() {
@@ -88,10 +92,26 @@ public class Funcionario extends Usuario {
     }
 
     public int getId_usuario() {
-        return id_usuario;
+        return usuario_id;
     }
 
     public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+        this.usuario_id = id_usuario;
+    }
+
+    public int getId_funcionario() {
+        return id_funcionario;
+    }
+
+    public void setId_funcionario(int id_funcionario) {
+        this.id_funcionario = id_funcionario;
+    }
+
+    public int getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(int usuario_id) {
+        this.usuario_id = usuario_id;
     }
 }

@@ -3,31 +3,32 @@ package model;
 import java.time.LocalDate;
 
 abstract class Usuario {
-    protected int id;
+    protected int id_usuario;
     protected String nome;
     protected String cpf;
-    protected LocalDate dataNascimento;
+    protected LocalDate data_nascimento;
     protected String telefone;
     protected Endereco endereco;
 
     // Construtor
-    public Usuario(int id, String nome, String cpf, LocalDate dataNascimento, String telefone, Endereco endereco){
-        this.id = id;
+    public Usuario(int id_usuario, String nome, String cpf, LocalDate data_nascimento, String telefone, Endereco endereco){
+        this.id_usuario = id_usuario;
         this.nome = nome;
         this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
+        this.data_nascimento = data_nascimento;
         this.telefone = telefone;
         this.endereco = endereco;
     }
 
 
+
     //Métodos Getters and Setters
     public int getId() {
-        return id;
+        return id_usuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNome() {
@@ -46,12 +47,12 @@ abstract class Usuario {
         this.cpf = cpf;
     }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
+    public LocalDate getData_nascimento() {
+        return data_nascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setData_nascimento(LocalDate data_nascimento) {
+        this.data_nascimento = data_nascimento;
     }
 
     public String getTelefone() {
@@ -79,10 +80,10 @@ abstract class Usuario {
     }
 
     public String consultarDados(){
-        String s = "ID: " + id + "\n" +
+        String s = "ID: " + id_usuario + "\n" +
                 "Nome: " + nome + "\n" +
                 "CPF: " + cpf + "\n" +
-                " Data de Nascimento: " + dataNascimento + "\n" +
+                " Data de Nascimento: " + data_nascimento + "\n" +
                 " Telefone: " + telefone + "\n" +
                 " Endereço: " + endereco;
         return s;
