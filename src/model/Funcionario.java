@@ -7,6 +7,7 @@ public class Funcionario extends Usuario {
     private String codigoFuncionario;
     private String cargo;
     private String senha;
+    private  int id_usuario; //relacionado a tabela usuario
 
     //Construtor
     public Funcionario (int id, String nome, String cpf, LocalDate dataNascimento, String telefone, Endereco endereco, String senha, String codigoFuncionario, String cargo){
@@ -58,5 +59,39 @@ public class Funcionario extends Usuario {
 
     public void gerarRelatorioMovimentacao(){
         //implementação
+    }
+
+    //METODOS GETTRS AND SETTERS
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getCodigoFuncionario() {
+        return codigoFuncionario;
+    }
+
+    public void setCodigoFuncionario(String codigoFuncionario) {
+        this.codigoFuncionario = codigoFuncionario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 }
