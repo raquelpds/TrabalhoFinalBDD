@@ -8,15 +8,17 @@ public class Funcionario extends Usuario {
     private String codigo_funcionario;
     private String cargo;
     private String senha;
-    private int usuario_id; //relacionado a tabela usuario
+    private int usuario_id;
+    private int endereco_id;//relacionado a tabela endereco
 
     //Construtor
-    public Funcionario (int id_usuario, String nome, String cpf, LocalDate data_nascimento, String telefone, Endereco endereco, String senha, String codigo_funcionario, String cargo, int usuario_id){
+    public Funcionario (int id_usuario, String nome, String cpf, LocalDate data_nascimento, String telefone, Endereco endereco, String senha, String codigo_funcionario, String cargo, int usuario_id, int endereco_id){
         super(id_usuario, nome, cpf, data_nascimento, telefone, endereco); //chama o construtor de usuário
         this.codigo_funcionario = codigo_funcionario;
         this.cargo = cargo;
         this.senha = senha;
         this.usuario_id = usuario_id;
+        this.endereco_id = endereco_id;
     }
 
 
@@ -113,5 +115,13 @@ public class Funcionario extends Usuario {
 
     public void setUsuario_id(int usuario_id) {
         this.usuario_id = usuario_id;
+    }
+
+    public int getEndereco_id() {
+        return endereco_id;
+    }
+
+    public void setEndereco_id(int endereco_id) {
+        this.endereco_id = endereco_id;
     }
 }

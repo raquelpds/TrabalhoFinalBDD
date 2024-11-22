@@ -15,6 +15,16 @@ public class ConnectionFactory {
         }
     }
 
+    public static void desconectar(Connection conn) {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) {
         try (Connection connection = getConnection()) {
