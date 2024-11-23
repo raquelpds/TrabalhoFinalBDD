@@ -24,7 +24,7 @@ public class Funcionario extends Usuario {
 
 
     @Override
-    public boolean login(String senha){
+    public boolean login(String cpf, String senha){
         //validação específica para funcionário
         if(this.senha.equals(senha) && this.codigo_funcionario != null){
             return true;

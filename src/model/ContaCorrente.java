@@ -7,7 +7,6 @@ public class ContaCorrente extends Conta {
     private LocalDate dataVencimento;
 
     //construtor
-
     public ContaCorrente(String agencia, Cliente cliente, int numero, double saldo, double limite, LocalDate dataVencimento) {
         super(agencia, cliente, numero, saldo);
         this.limite = limite;
@@ -17,6 +16,20 @@ public class ContaCorrente extends Conta {
     //métodos
     public double consultarLimite(){
         return this.limite;
+    }
+
+    @Override
+    public boolean sacar(double valor) {
+        if (valor <= saldo) {
+            saldo -= valor;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getNumeroConta() {
+        return getNumero(); // Retorna o número da conta
     }
 }
 

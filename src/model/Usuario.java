@@ -20,6 +20,9 @@ abstract class Usuario {
         this.endereco = endereco;
     }
 
+    public Usuario() {
+
+    }
 
 
     //Métodos Getters and Setters
@@ -72,7 +75,7 @@ abstract class Usuario {
     }
 
     //Métodos comuns e abstratos
-    abstract boolean login(String senha);
+    abstract boolean login(String cpf, String senha);
 
     public void logout(){
         //implementação
@@ -87,5 +90,13 @@ abstract class Usuario {
                 " Telefone: " + telefone + "\n" +
                 " Endereço: " + endereco;
         return s;
+    }
+
+    public LocalDate getDataNascimento() {
+        return null;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+
     }
 }

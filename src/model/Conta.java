@@ -1,10 +1,11 @@
 package model;
 
-abstract class Conta {
+public abstract class Conta {
     private int numero;
     private String agencia;
     protected double saldo;
     private Cliente cliente;
+    private String tipo_conta;
 
     //construtor
     public Conta(String agencia, Cliente cliente, int numero, double saldo) {
@@ -15,7 +16,6 @@ abstract class Conta {
     }
 
 
-    // oieee
     //métodos getters e setters
     public String getAgencia() {
         return agencia;
@@ -54,11 +54,7 @@ abstract class Conta {
         this.saldo += valor;
     }
 
-    public boolean sacar(double valor){
-        if(this.saldo <= valor){
-            this.saldo -= valor;
-            return true;
-        }
+    public boolean sacar(double valor) {
         return false;
     }
 
@@ -66,4 +62,7 @@ abstract class Conta {
         return this.saldo;
     }
 
+    public int getNumeroConta() {
+        return 0;
+    }
 }

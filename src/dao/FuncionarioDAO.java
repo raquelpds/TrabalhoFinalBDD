@@ -318,6 +318,8 @@ public class FuncionarioDAO {
 
 
 
+
+
     /*
     //Metodo para ler um funcionario pelo id
     public Funcionario read (int idFuncionario) throws SQLException{

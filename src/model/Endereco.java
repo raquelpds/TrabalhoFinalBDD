@@ -71,4 +71,6 @@ public class Endereco {
         return "CEP: " + cep + ", Local: " + local + ", Nº: " + numeroCasa + ", Bairro: " + bairro +
                 ", Cidade: " + cidade + ", Estado: " + estado;
     }
+
+
 }
