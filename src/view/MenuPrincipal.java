@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 
 public class MenuPrincipal {
 
-    // Método main para iniciar o Menu Principal diretamente
+    //MAIN PARA ABRIR O MENUPRINCIPAL DIRETAMENTE, SEM USAR O TELALOGIN
     public static void main(String[] args) {
         MenuPrincipal menuPrincipal = new MenuPrincipal();
         menuPrincipal.exibirMenu();  // Exibe o menu principal
     }
 
-    // Método para exibir o Menu Principal
+    //METODO EXIBIR MENU
     public void exibirMenu() {
         // Criação da janela principal
         JFrame frame = new JFrame("Menu Principal");
@@ -78,14 +78,14 @@ public class MenuPrincipal {
         frame.setVisible(true);
     }
 
-    // Método para abrir o menu do Funcionário
+    //ABRIR MENU DO FUNCIONÁRIO
     private static void abrirMenuFuncionario() {
         // Cria uma nova instância do MenuFuncionario e chama o método para exibir o menu
         MenuFuncionario menuFuncionario = new MenuFuncionario();
         menuFuncionario.exibirMenuFuncionario(); // Exibe o Menu do Funcionário
     }
 
-    // Método para abrir o menu do Cliente
+    //ABRIR MENU DO CLIENTE
     private static void abrirMenuCliente() {
         // Cria uma instância do MenuCliente
         MenuCliente menuCliente = new MenuCliente();

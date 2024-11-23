@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class MenuFuncionario {
 
-    // Método para exibir o Menu do Funcionário
+    //EXIBIR MENU FUNCIONÁRIO
     public void exibirMenuFuncionario() {
         JFrame frameFuncionario = new JFrame("Menu do Funcionário");
         frameFuncionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -63,7 +63,7 @@ public class MenuFuncionario {
                 // Busca o cliente pelo ID
                 Cliente cliente = BancoController.buscarClientePorId(clienteId).orElseThrow(() -> new Exception("Cliente não encontrado!"));
 
-                // Chama o método para abrir a conta e mostra o resultado
+                //CHAMA O MÉTODO ABRIR CONTA
                 String resultado = BancoController.abrirConta(agencia, cliente, numero, saldo, tipoConta, Double.parseDouble(limite), dataVencimento, taxaRendimento);
                 JOptionPane.showMessageDialog(null, resultado);
 

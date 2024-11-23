@@ -4,12 +4,10 @@ import dao.ConnectionFactory;
 import dao.FuncionarioDAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Scanner;
 
-public class Main {
+public class TesteExecucao {
     public static void main(String[] args) throws SQLException {
 
         //Conexão com o Banco de Dados

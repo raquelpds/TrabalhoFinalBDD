@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ClienteDAO {
 
-    // Método para salvar um novo cliente
+    //SAVE
     public void save(Cliente cliente) throws SQLException {
         String sqlUsuario = "INSERT INTO usuario (nome, cpf, data_nascimento, telefone, tipo_usuario, senha) VALUES (?, ?, ?, ?, 'CLIENTE', ?)";
         String sqlCliente = "INSERT INTO cliente (id_usuario) VALUES (?)";
@@ -43,7 +43,7 @@ public class ClienteDAO {
         }
     }
 
-    // Método para buscar cliente por ID
+    //BUSCAR
     public Cliente findById(int id) throws SQLException {
         String sql = "SELECT u.nome, u.cpf, u.data_nascimento, u.telefone, u.senha " +
                 "FROM cliente c " +
@@ -70,7 +70,7 @@ public class ClienteDAO {
         return null;
     }
 
-    // Método para atualizar informações de um cliente
+    //UPDATE
     public void update(Cliente cliente) throws SQLException {
         String sql = "UPDATE usuario SET nome = ?, cpf = ?, data_nascimento = ?, telefone = ?, senha = ? " +
                 "WHERE id_usuario = (SELECT id_usuario FROM cliente WHERE id_cliente = ?)";
@@ -89,7 +89,7 @@ public class ClienteDAO {
         }
     }
 
-    // Método para deletar cliente por ID
+    //DELETE
     public void delete(int id) throws SQLException {
         String sqlCliente = "DELETE FROM cliente WHERE id_cliente = ?";
         String sqlUsuario = "DELETE FROM usuario WHERE id_usuario = (SELECT id_usuario FROM cliente WHERE id_cliente = ?)";
@@ -108,7 +108,7 @@ public class ClienteDAO {
         }
     }
 
-    // Método para listar todos os clientes (opcional)
+    //LISTAR TODOS
     public List<Cliente> findAll() throws SQLException {
         String sql = "SELECT c.id_cliente, u.nome, u.cpf, u.data_nascimento, u.telefone " +
                 "FROM cliente c " +
