@@ -44,7 +44,7 @@ public class FuncionarioDAO {
             System.out.print("Senha: ");
             String senha = scanner.nextLine();
 
-            // inserir no SQL
+            // inserir no SQL - ordem correta dos campos
             String sqlUsuario = "INSERT INTO usuario (nome, cpf, data_nascimento, telefone, tipo_usuario, senha) VALUES (?, ?, ?, ?, ?, ?)";
             int usuarioId = 0;
             try (PreparedStatement stmtUsuario = connection.prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS)) {
@@ -56,7 +56,7 @@ public class FuncionarioDAO {
                 stmtUsuario.setString(6, senha);
                 stmtUsuario.executeUpdate();
 
-                // Recuperar o id_usuario gerado
+                // Pegar o id_usuario gerado
                 try (ResultSet rs = stmtUsuario.getGeneratedKeys()) {
                     if (rs.next()) {
                         usuarioId = rs.getInt(1);  // O ID gerado é o primeiro campo
@@ -94,11 +94,11 @@ public class FuncionarioDAO {
                     stmtEndereco.setString(3, endereco.getBairro());
                     stmtEndereco.setString(4, endereco.getCidade());
                     stmtEndereco.setString(5, endereco.getEstado());
-                    stmtEndereco.setInt(6, usuarioId);  // Usando o id_usuario gerado
+                    stmtEndereco.setInt(6, usuarioId);
                     stmtEndereco.setString(7, endereco.getLocal());
                     stmtEndereco.executeUpdate();
 
-                    // Recupera o ID do endereco gerado
+                    // Recupera o ID do endereco
                     int enderecoId = 0;
                     try (ResultSet generatedKeys = stmtEndereco.getGeneratedKeys()) {
                         if (generatedKeys.next()) {
@@ -113,14 +113,14 @@ public class FuncionarioDAO {
                         System.out.print("Cargo: ");
                         String cargo = scanner.nextLine();
 
-                        // Inserir o funcionário na tabela funcionario
+                        // Inserir no SQL - tabela funcionário
                         String sqlFuncionario = "INSERT INTO funcionário (codigo_funcionario, cargo, usuario_id, senha, endereco_id) VALUES (?, ?, ?, ?, ?)";
                         try (PreparedStatement stmtFuncionario = connection.prepareStatement(sqlFuncionario)) {
-                            stmtFuncionario.setString(1, codigo_funcionario); // codigo_funcionario
-                            stmtFuncionario.setString(2, cargo); // cargo
-                            stmtFuncionario.setInt(3, usuarioId); // usuario_id
+                            stmtFuncionario.setString(1, codigo_funcionario);
+                            stmtFuncionario.setString(2, cargo);
+                            stmtFuncionario.setInt(3, usuarioId);
                             stmtFuncionario.setString(4, senha);
-                            stmtFuncionario.setInt(5, enderecoId); // endereco_id
+                            stmtFuncionario.setInt(5, enderecoId);
 
                             stmtFuncionario.executeUpdate();
                         }
@@ -133,16 +133,16 @@ public class FuncionarioDAO {
                     }
 
                 } catch (SQLException e) {
-                    connection.rollback(); // Reverte a transação em caso de erro
+                    connection.rollback();
                     System.err.println("Erro ao inserir endereço: " + e.getMessage());
                 }
 
             } catch (SQLException e) {
-                connection.rollback(); // Reverte a transação em caso de erro
+                connection.rollback();
                 System.err.println("Erro ao inserir usuário: " + e.getMessage());
             } finally {
                 try {
-                    connection.setAutoCommit(true); // Habilitar o autocommit novamente
+                    connection.setAutoCommit(true);
                 } catch (SQLException e) {
                     System.err.println("Erro ao habilitar o autocommit: " + e.getMessage());
                 }
@@ -157,8 +157,6 @@ public class FuncionarioDAO {
         }
     }
 
-
-    //outros métodos
     // Metodo para atualizar um funcionário
     public void atualizarFuncionario() throws SQLException {
         connection = ConnectionFactory.getConnection();
@@ -178,9 +176,9 @@ public class FuncionarioDAO {
             String sql = "UPDATE funcionário SET cargo = ?, senha = ? WHERE codigo_funcionario = ?";
 
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-                stmt.setString(1, novoCargo);        // Cargo no primeiro parâmetro
-                stmt.setString(2, novaSenha);        // Senha no segundo parâmetro
-                stmt.setInt(3, codigo_funcionario);  // Código do funcionário no terceiro parâmetro
+                stmt.setString(1, novoCargo);
+                stmt.setString(2, novaSenha);
+                stmt.setInt(3, codigo_funcionario);
 
                 int rowsUpdated = stmt.executeUpdate();
                 if (rowsUpdated > 0) {
@@ -189,9 +187,9 @@ public class FuncionarioDAO {
                     System.out.println("Nenhum funcionário encontrado com o código informado.");
                 }
 
-                connection.commit(); // Commit para confirmar a atualização
+                connection.commit();
             } catch (SQLException e) {
-                connection.rollback(); // Rollback em caso de erro
+                connection.rollback();
                 System.err.println("Erro ao atualizar funcionário: " + e.getMessage());
             }
         } catch (Exception e) {
@@ -210,6 +208,7 @@ public class FuncionarioDAO {
             System.out.print("Digite o Código do funcionário a ser excluído: ");
             int codigo_funcionario = scanner.nextInt();
 
+            //DELETAR NO SQL
             String sql = "DELETE FROM funcionário WHERE codigo_funcionario = ?";
 
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -229,13 +228,14 @@ public class FuncionarioDAO {
 
     // Metodo para consultar todos os funcionários e seus dados relacionados
     public void consultarTodosFuncionarios() {
+
         // Consulta SQL para pegar todos os funcionários, incluindo dados de usuário e endereço
         String sql = "SELECT f.id_funcionario, f.codigo_funcionario, f.cargo, f.usuario_id, f.endereco_id, " +
                 "u.nome, u.cpf, u.data_nascimento, u.telefone, u.senha, " +
                 "e.cep, e.local, e.numero_casa, e.bairro, e.cidade, e.estado " +
                 "FROM funcionário f " +
-                "JOIN usuario u ON u.id_usuario = f.usuario_id " + // Relacionando com a tabela 'usuario'
-                "JOIN endereco e ON e.usuario_id = u.id_usuario"; // Relacionando com a tabela 'endereco'
+                "JOIN usuario u ON u.id_usuario = f.usuario_id " + // Relacionando com a tabela usuario
+                "JOIN endereco e ON e.usuario_id = u.id_usuario"; // Relacionando com a tabela endereco
 
 
         List<Funcionario> funcionarios = new ArrayList<>();
@@ -275,6 +275,8 @@ public class FuncionarioDAO {
                 funcionarios.add(funcionario);
             }
 
+            //TESTE PARA VERIFICAR SE OS DADOS ESTÃO RETORNANDO OK
+            /*
             // Exibindo os dados dos funcionários no console
             if (funcionarios.isEmpty()) {
                 System.out.println("Não há funcionários cadastrados.");
@@ -308,10 +310,14 @@ public class FuncionarioDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao acessar o banco de dados: " + e.getMessage());
+
+    */
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
-
-
 }
 
 
@@ -320,95 +326,3 @@ public class FuncionarioDAO {
 
 
 
-    /*
-    //Metodo para ler um funcionario pelo id
-    public Funcionario read (int idFuncionario) throws SQLException{
-        String sql = "SELECT * FROM funcionário WHERE id_funcionario = ?";
-        try(PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1,idFuncionario);
-            ResultSet resul = stmt.executeQuery();
-            if(resul.next()){
-                Endereco endereco = new Endereco(
-                        resul.getString("estado"),
-                        resul.getString("cidade"),
-                        resul.getString("bairro"),
-                        resul.getString("local"),
-                        resul.getString("cep"),
-                        resul.getInt("numeroCasa")
-                );
-                return new Funcionario(
-                        resul.getInt("id_usuario"),
-                        resul.getString("nome"),
-                        resul.getString("cpf"),
-                        resul.getDate("data_nascimento").toLocalDate(),
-                        resul.getString("telefone"),
-                        endereco,
-                        resul.getString("senha"),
-                        resul.getString("codigo_funcionario"),
-                        resul.getString("cargo"),
-                        resul.getInt("usuario_id")
-                );
-            }
-        }
-        return null;
-    }
-
-    // READ LIST: metodo para listar todos os funcionários
-    public List<Funcionario> findAll() throws SQLException{
-        String sql = "SELECT * FROM funcionário";
-        List<Funcionario> funcionarios = new ArrayList<>();
-
-        try(Statement stmt = connection.createStatement()){
-            ResultSet resul = stmt.executeQuery(sql);
-
-            while (resul.next()){
-                Endereco endereco = new Endereco(
-                        resul.getString("estado"),
-                        resul.getString("cidade"),
-                        resul.getString("bairro"),
-                        resul.getString("local"),
-                        resul.getString("cep"),
-                        resul.getInt("numeroCasa")
-                );
-                Funcionario funcionario = new Funcionario(
-                        resul.getInt("id_usuario"),
-                        resul.getString("nome"),
-                        resul.getString("cpf"),
-                        resul.getDate("data_nascimento").toLocalDate(),
-                        resul.getString("telefone"),
-                        endereco,
-                        resul.getString("senha"),
-                        resul.getString("codigo_funcionario"),
-                        resul.getString("cargo"),
-                        resul.getInt("usuario_id")
-                );
-                funcionarios.add(funcionario);
-            }
-            return funcionarios;
-        }
-    }
-
-    //ATUALIZAÇÃO: metodo para atualizar os dados de um funcionário
-    public void update(Funcionario funcionario) throws SQLException{
-        String sql = "UPDATE funcionário SET codigo_funcionario = ?, cargo = ?, usuario_id = ? WHERE id_funcionario = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, funcionario.getId_funcionario());
-            stmt.setString(2, funcionario.getCodigo_funcionario());
-            stmt.setString(3, funcionario.getCargo());
-            stmt.setString(4, funcionario.getSenha());
-            stmt.setInt(5, funcionario.getUsuario_id());
-            stmt.executeUpdate();
-        }
-    }
-
-
-    }
-
-
-
-
-
-
-
-
-*/
